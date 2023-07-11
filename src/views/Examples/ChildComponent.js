@@ -1,4 +1,5 @@
 import React from "react";
+import './Demo.scss'
 class ChildComponent extends React.Component{
     state = {
         showJobs: false
@@ -7,6 +8,9 @@ class ChildComponent extends React.Component{
         this.setState({
             showJobs: !this.state.showJobs
         })
+    }
+    handleOnClickDelete = (job) => {
+        this.props.deleteAJob(job)
     }
     render() {
         let { arrJobs } = this.props;
@@ -19,8 +23,10 @@ class ChildComponent extends React.Component{
                 {showJobs === false ?
                     <div>
                         <button
-                        onClick={()=>{this.handleShowHide()}}>
-                            Show</button>
+                        onClick={() => { this.handleShowHide() }}
+                        className="btn-show">
+                            Show
+                        </button>
                     </div>
                 :
                     <>
@@ -30,6 +36,7 @@ class ChildComponent extends React.Component{
                             return (
                                 <div key={item.id}>
                                     {item.title} - {item.salary}
+                                    <></> <span onClick={() => this.handleOnClickDelete(item)}>x</span>
                                 </div>
                             )
                         })
